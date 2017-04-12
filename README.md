@@ -3,8 +3,9 @@ An experiment in living mecha world creation. Create, adopt and set them free.
 
 [![Mass Migrations](/textures/cover.jpg "Mass Migrations")](https://marpi.pl/work/mass-migrations/)
 
-More info: [https://marpi.pl/work/mass-migrations/](https://marpi.pl/work/mass-migrations/)
-See live: [https://massmigrations.com/](https://massmigrations.com/)
+More info: [marpi.pl/work/mass-migrations](https://marpi.pl/work/mass-migrations/)
+
+See live: [massmigrations.com](https://massmigrations.com/)
 
 Credits
 -------
@@ -20,4 +21,4 @@ Libraries
 License
 -------
 
-Copyright © Marpi, https://marpi.pl
+Copyright © Marpi, [marpi.pl](https://marpi.pl/)
