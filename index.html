@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Mass Migrations</title>
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <meta charset="utf-8">
+
+        <!-- Origin Trial Token, feature = WebVR, origin = https://massmigrations.com, expires = 2017-05-23 -->
+        <meta http-equiv="origin-trial" data-feature="WebVR" data-expires="2017-05-23" content="An8c+PNggQAKdLXYy21uPKBYJDc6O+Q1xRJipkYmXLpLYvhyHgnzBpekxH/DIPz5w5EDHqkXDJ6mNyNQZnFeVwoAAABkeyJvcmlnaW4iOiJodHRwczovL21hc3NtaWdyYXRpb25zLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVlIiLCJleHBpcnkiOjE0OTU1Njg2ODgsImlzU3ViZG9tYWluIjp0cnVlfQ==">
+
+        <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+
+        <link href="./css/style.css" rel="stylesheet" type="text/css">
+        <link href="./css/font-awesome.css" rel="stylesheet" type="text/css">
+    </head>	
+
+    <body bgcolor="#000000">
+        <div id="preloader">
+            <div id="preloader_background">
+                <div id="progress"></div>
+            </div>
+        </div>
+        <div id="title" class="bold">
+            Mass Migrations
+        </div>
+        <div id="about" class="bold">
+            <a id="aboutbutton">About</a>
+        </div>
+        <div id="header">
+            <img id="watermark" src="textures/logo.svg">
+        </div>
+        <div id="nav" class="bold">
+            <a id="create" class="button outline"><i class="fa fa-refresh" id="refresh" style="display: inline;">&nbsp;</i>Generate<span class="lines"></span></a>
+            <a id="gallery" class="button outline">Gallery<span class="lines"></span></a>
+            <!--<a id="setfree" class="button outline">Play<span class="lines"></span></a>-->
+        </div>
+        <div id="leftnav" class="bold">
+            <a href="javascript:AudioHandler.finishSound()"><i class="fa fa-chevron-left fa-lg"></i> return</a>
+        </div>
+        <div id="footer" class="bold">
+            <a id="vr">ENTER WEBVR</a>
+            <a id="fullscreen" title="Toggle Fullscreen"><i class="fa fa-arrows-alt fa-lg"></i></a>
+        </div>
+        <div id="overlay" class="overlay">
+            <div class="tab">
+                <div class="popup">
+                    <div class="content">
+                        <h1>This is Mass Migrations</h1>
+                        An experiment in living mecha world creation. Create, adopt and set them free.
+                        <br><br>
+                        <!--<b>Generate</b>: Create a new creature<br>
+                        <b>Gallery</b>: Adopt from an infinite, real-time gallery of creations<br>
+                        <b>Play</b>: Free your creation in a sound-reactive visualization<br>
+                        <br>-->
+                        Mass Migrations was created by <a href="http://marpi.pl" target="_blank">Marpi</a> with music by <a href="http://anonbast.com" target="_blank">An On Bast</a> and design by <a href="http://ahering.com" target="_blank">Angelique Hering</a>.
+                        <br><br>
+                        Big thanks to <a href="http://poolsofchrome.tumblr.com/" target="_blank">Cosimo Galluzzi</a> for inspiration, <a href="https://twitter.com/mrdoob" target="_blank">Ricardo Cabello</a> for ThreeJS, <a href="https://twitter.com/Tojiro" target="_blank">Brandon Jones</a> for WebVR, <a href="https://twitter.com/zadvorsky" target="_blank">Szenia Zadvornykh</a> and <a href="https://twitter.com/felixturner" target="_blank">Felix Turner</a> for some awesome shaders and <a href="https://twitter.com/obscura_digital" target="_blank">Obscura Digital</a> for support. 
+                        <br>
+                        <br>
+                        <p align="center" style="cursor: pointer;"><i class="fa fa-times fa-2x"></i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="overlayVR" class="overlay">
+            <div class="tab">
+                <div class="popup">
+                    <h1>Mass Migrations in VR</h1>
+                    If you have an HTC Vive or Oculus Rift headset, you can see this website in Virtual Reality!
+                    <br><br>
+                    The only thing you need is a WebVR enabled browser, you can download it from here: <a href="http://webvr.info/" target="_blank">http://webvr.info/</a>.
+                    <br><br>
+                    After you install it, come back to this site and you will be put INSIDE this generative world. Make sure your headset firmware is up to date. If you have any trouble setting it up, feel free to reach out to me on <a href="https://twitter.com/marpi_" target="_blank">Twitter</a>.
+                    <br>
+                    <br>
+                    <p align="center" style="cursor: pointer;"><i class="fa fa-times fa-2x"></i></p>
+                </div>
+            </div>
+        </div>
+        <script>
+            var preloaderProgressValue = 0.15;
+            var preloaderProgressAnimValue = 0;
+            function preloaderProgress(perc) {
+                preloaderProgressValue = perc;
+            }
+            function draw() {
+                preloaderProgressAnimValue -= (preloaderProgressAnimValue - preloaderProgressValue) / 5;
+                document.getElementById("progress").style.width = 100 * preloaderProgressAnimValue + "px";
+                document.getElementById("progress").style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+                if (preloaderProgressAnimValue < .98)
+                    requestAnimationFrame(draw);
+            }
+            draw();
+
+            var deeplinkName = Math.random();
+        </script>
+            <script src="./js/lib/minivents.min.js"></script>
+            <script src="./js/lib/jquery-2.2.4.min.js"></script>
+            <script src="./js/lib/Detector.js"></script>
+            <script src="./js/lib/three.js"></script>
+            <script src="./js/lib/stats.min.js"></script>
+            <script src="./js/lib/SimplexNoise.js"></script>
+            <script src="./js/lib/atutil.js"></script>
+            <script src="./js/lib/isMobile.js"></script>
+            <script src="./js/lib/TweenMax.min.js"></script>
+            <script src="./js/lib/totro.js"></script>
+            <script src="./js/lib/seedrandom.js"></script>
+            <script src="./js/lib/pnltri.min.js"></script>
+            <script src="./js/lib/bas.js"></script>
+            <script src="./js/lib/WebVR.js"></script>
+            <script src="./js/lib/VREffect.js"></script>
+            <script src="./js/lib/controls/VRControls.js"></script>
+            <script src="./js/lib/ViveController.js"></script>  
+            <script src="./js/lib/OBJLoader.js"></script>
+
+            <script src="./js/lib/postprocessing/EffectComposer.js"></script>
+            <script src="./js/lib/postprocessing/RenderPass.js"></script>
+            <script src="./js/lib/postprocessing/ShaderPass.js"></script>
+            <script src="./js/lib/postprocessing/MaskPass.js"></script> 
+            <script src="./js/lib/controls/OrbitControls.js"></script>
+            <script src="./js/lib/controls/DeviceOrientationControls.js"></script>
+            <script src="./js/lib/modifiers/BufferSubdivisionModifier.js"></script>
+
+            <script src="./js/lib/shaders/CopyShader.js"></script>
+            <script src="./js/lib/shaders/TiltShiftShader.js"></script>
+            <script src="./js/lib/shaders/SMAAShader.js"></script>
+            <script src="./js/lib/shaders/HorizontalBlurShader.js"></script>
+            <script src="./js/lib/shaders/VerticalBlurShader.js"></script>
+            <script src="./js/lib/shaders/MirrorShader.js"></script>
+            <script src="./js/lib/shaders/FilmShader.js"></script>
+            <script src="./js/lib/shaders/RGBShiftShader2.js"></script>
+            <script src="./js/lib/shaders/SSAOShader.js"></script>
+            <script src="./js/lib/shaders/BokehShader.js"></script>
+
+            <script src="./js/lib/postprocessing/SMAAPass.js"></script>
+            <script src="./js/lib/postprocessing/ManualMSAARenderPass.js"></script>
+            <script src="./js/lib/postprocessing/BokehPass.js"></script>
+
+            <script src="./js/viz/BG.js"></script>
+            <script src="./js/viz/Mecha.js"></script>
+            <script src="./js/viz/Create.js"></script>
+            <script src="./js/viz/Mountains.js"></script>
+            <script src="./js/viz/Crystals.js"></script>
+            <script src="./js/viz/Ocean.js"></script>
+            <script src="./js/viz/Gallery.js"></script>
+            <script src="./js/viz/Assets.js"></script>
+            <script src="./js/viz/Tools.js"></script>
+
+            <script src="./js/Generator.js"></script>
+            <script src="./js/Explosion.js"></script>
+            <script src="./js/Main.js"></script>
+            <script src="./js/ControlsHandler.js"></script>
+            <script src="./js/FXHandler.js"></script>
+            <script src="./js/VizHandler.js"></script>
+            <script src="./js/NavHandler.js"></script>
+    </body>
+</html>
